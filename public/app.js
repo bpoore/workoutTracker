@@ -1,5 +1,3 @@
-//Test using git push/pull for server work...
-
 var serverURL = 'http://localhost:3000';
 
 function getData() {
@@ -8,14 +6,18 @@ function getData() {
   req.addEventListener('load', function() {
       if(req.status >= 200 && req.status < 400) {
         data = JSON.parse(req.responseText);
-        buildTable(data);
+        if(data.length === 0) {
+          console.log('ON THE RIGHT PATH');
+        } else {  
+          buildTable(data);
+        }
       } 
       else {
         console.log("Error in network request: " + request.statusText);
       }
     });
     req.send();
-} 
+}; 
 
 function bindSubmitButtons(){
   var homeSubmit = document.getElementById('submit-exercise');

@@ -5,6 +5,8 @@ var mysql = require('mysql');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
+var db = require('./dbqueries.js');
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,17 +24,13 @@ var pool = mysql.createPool({
 
 
 app.get('/',function(req,res,next){
-    context = {}
-    res.render('home', context);
+    res.render('home');
 });
 
 app.get('/get-data',function(req,res,next){
-  pool.query('SELECT name, reps, weight, DATE_FORMAT(date, "%d-%m-%Y") as date, lbs FROM workouts', function(err, rows, fields){
-    if(err){
-      next(err);
-      return;
-    }
-    res.json(rows);
+  db.getExercises().then(function(exercises) {
+    console.log(exercises);
+    res.json(exercises);
   }); 
 });
 
