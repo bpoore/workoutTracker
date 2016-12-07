@@ -1,6 +1,6 @@
 //Test using git push/pull for server work...
 
-var serverURL = 'http://52.35.35.75:3000';
+var serverURL = 'http://localhost:3000';
 
 function getData() {
   var req = new XMLHttpRequest();
@@ -122,6 +122,8 @@ function buildTable(data) {
     exerciseRow.appendChild(weight);
 
     var date = document.createElement('td');
+    console.log(data[i].date);
+    console.log(typeof(data[i].date));
     date.textContent = data[i].date;
     exerciseRow.appendChild(date);
     

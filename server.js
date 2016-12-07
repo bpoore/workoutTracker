@@ -15,10 +15,11 @@ app.set('port', 3000);
 var pool = mysql.createPool({
   connectionLimit : 10,
   host            : 'localhost',
-  user            : 'student',
-  password        : 'default',
-  database        : 'student'
+  user            : 'root',
+  password        : 'password',
+  database        : 'weightlifting'
 });
+
 
 app.get('/',function(req,res,next){
     context = {}
@@ -26,7 +27,7 @@ app.get('/',function(req,res,next){
 });
 
 app.get('/get-data',function(req,res,next){
-  pool.query('SELECT * FROM workouts', function(err, rows, fields){
+  pool.query('SELECT name, reps, weight, DATE_FORMAT(date, "%d-%m-%Y") as date, lbs FROM workouts', function(err, rows, fields){
     if(err){
       next(err);
       return;
@@ -133,5 +134,5 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-  console.log('Express started on http://52.35.35.75:' + app.get('port') + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 }); 
