@@ -19,7 +19,6 @@ app.get('/',function(req,res,next){
 
 app.get('/get-data',function(req,res,next){
   db.getExercisesDateFormatted().then(function(exercises) {
-    console.log(exercises);
     res.json(exercises);
   }); 
 });
@@ -42,7 +41,6 @@ app.get('/delete', function(req,res,next) {
 
 ///safe-update?id=1&name=The+Task&done=false
 app.get('/update',function(req,res,next){
-  var context = {};
   db.updateExercise(req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs, req.query.id).then(function () {
     db.getExercisesDateFormatted().then(function (exercises) {
       res.json(exercises);
