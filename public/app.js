@@ -53,8 +53,9 @@ function bindSubmitButtons(){
     document.getElementById('submit-update').addEventListener('click', function(event) {
       event.preventDefault();
       var req = new XMLHttpRequest();
+      console.log("STUPID ID = " + document.getElementById('exId').value);
       var queryString = '?name=' + document.getElementById('exerciseName').value + '&reps=' + document.getElementById('reps').value + '&weight=' + document.getElementById('weight').value + '&date=' + document.getElementById('exercise-date').value + '&lbs=' + document.getElementById('lbs-value').value + '&id=' + document.getElementById('exId').value;
-      console.log(queryString);
+      console.log("String =" + queryString);
       if (document.getElementById('exerciseName').value == "") {
         alert('Error, no name');
       } else {
@@ -152,6 +153,8 @@ function buildTable(data) {
     updateBtn.textContent = 'Update';
     updateBtn.type = 'submit';
     updateBtn.className = 'btn btn-primary';
+    console.log('ID=' + data[i].id);
+    console.log(data[i]);
     bindUpdateBtn(updateBtn, data[i].id);
     updateCell.appendChild(updateBtn);
     exerciseRow.appendChild(updateCell);

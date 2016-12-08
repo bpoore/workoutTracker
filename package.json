@@ -14,6 +14,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.11.3",
     "mysql": "^2.8.0",
-    "request": "^2.69.0"
+    "request": "^2.69.0",
+    "sql-template-strings": "^2.2.2"
   }
 }
