@@ -1,4 +1,6 @@
-var serverURL = 'http://localhost:3000';
+var host = window.location.host;
+var serverURL = "http://" + host + "/";
+console.log ("serverURL = ", serverURL);
 
 function getData() {
   var req = new XMLHttpRequest();
@@ -8,16 +10,16 @@ function getData() {
         data = JSON.parse(req.responseText);
         if(data.length === 0) {
           console.log('ON THE RIGHT PATH');
-        } else {  
+        } else {
           buildTable(data);
         }
-      } 
+      }
       else {
         console.log("Error in network request: " + request.statusText);
       }
     });
     req.send();
-}; 
+};
 
 function bindSubmitButtons(){
   var homeSubmit = document.getElementById('submit-exercise');
@@ -38,15 +40,15 @@ function bindSubmitButtons(){
           data = JSON.parse(req.responseText);
           clearBody();
           buildTable(data);
-        } 
+        }
         else {
           console.log("Error in network request: " + request.statusText);
-        } 
+        }
       });
       req.send();
-    } 
+    }
   });
-} 
+}
 
   var updateSubmit = document.getElementById('submit-update');
   if (updateSubmit) {
@@ -62,7 +64,7 @@ function bindSubmitButtons(){
       req.addEventListener('load', function() {
           if(req.status >= 200 && req.status < 400) {
             window.location.href = "../";
-          } 
+          }
           else {
             console.log("Error in network request: " + request.statusText);
           }
@@ -70,11 +72,11 @@ function bindSubmitButtons(){
         req.send();
       }
     });
-  }  
-} 
+  }
+}
 
 function bindDeleteBtn(btn, id) {
-  btn.addEventListener('click', function(event) { 
+  btn.addEventListener('click', function(event) {
     event.preventDefault();
     var req = new XMLHttpRequest();
     req.open("GET", serverURL + '/delete?id=' +  id, true);
@@ -83,20 +85,20 @@ function bindDeleteBtn(btn, id) {
         var data = JSON.parse(req.responseText);
         clearBody();
         buildTable(data);
-      } 
+      }
       else {
         console.log("Error in network request: " + request.statusText);
       }
     });
       req.send();
-  }) 
-} 
+  })
+}
 
 function bindUpdateBtn(btn, id) {
-  btn.addEventListener('click', function(event) { 
+  btn.addEventListener('click', function(event) {
     window.location.href = "../edit?id=" + id;
-  }) 
-} 
+  })
+}
 
 function clearBody() {
   var parent = document.getElementById('exerciseData');
@@ -110,15 +112,15 @@ function buildTable(data) {
 
   for(var i=0; i<data.length; i++) {
     var exerciseRow = document.createElement('tr');
-    
+
     var name = document.createElement('td');
     name.textContent = data[i].name;
     exerciseRow.appendChild(name);
-    
+
     var reps = document.createElement('td');
     reps.textContent = data[i].reps;
     exerciseRow.appendChild(reps);
-    
+
     var weight = document.createElement('td');
     weight.textContent = data[i].weight;
     exerciseRow.appendChild(weight);
@@ -128,14 +130,14 @@ function buildTable(data) {
     console.log(typeof(data[i].date));
     date.textContent = data[i].date;
     exerciseRow.appendChild(date);
-    
+
     var units = document.createElement('td');
     if (data[i].lbs)
     {
       units.textContent = 'lbs';
     } else {
       units.textContent = 'kgs';
-    } 
+    }
     exerciseRow.appendChild(units);
 
     var delCell = document.createElement('td');
@@ -159,12 +161,11 @@ function buildTable(data) {
     exerciseRow.appendChild(updateCell);
 
     parent.appendChild(exerciseRow);
-  } 
+  }
 }
 
-document.addEventListener("DOMContentLoaded", bindSubmitButtons); 
+document.addEventListener("DOMContentLoaded", bindSubmitButtons);
 
 if (window.location.href == serverURL + '/') {
   window.onload = getData;
 }
-
