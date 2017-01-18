@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 3000);
+
+var port = process.env.PORT || 3000;
 
 app.get('/',function(req,res,next){
     res.render('home');
@@ -20,7 +21,7 @@ app.get('/',function(req,res,next){
 app.get('/get-data',function(req,res,next){
   db.getExercisesDateFormatted().then(function(exercises) {
     res.json(exercises);
-  }); 
+  });
 });
 
 app.get('/insert', function(req,res,next) {
@@ -53,7 +54,7 @@ app.get('/edit',function(req,res,next){
   db.getExercise(req.query.id).then(function(exercise) {
     res.render('edit', exercise);
   });
-}); 
+});
 
 app.use(function(req,res){
   res.status(404);
@@ -66,6 +67,6 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-app.listen(app.get('port'), function(){
+app.listen(port, function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
-}); 
+});

@@ -1,8 +1,8 @@
 {
-  "name": "db-practice",
+  "name": "workoutTracker",
   "version": "1.0.0",
   "description": "Database practice with express and node.js",
-  "main": "dbPractice.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
