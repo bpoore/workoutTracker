@@ -7,6 +7,7 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var db = require('./dbqueries.js');
 
 app.use(express.static('public'));
+app.use(express.static(__dirname + '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
@@ -68,5 +69,5 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(port, function(){
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://localhost:' + port + '; press Ctrl-C to terminate.');
 });
