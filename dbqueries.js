@@ -5,7 +5,7 @@ var pool = mysql.createPool({
   connectionLimit : 10,
   host            : 'us-cdbr-iron-east-04.cleardb.net',
   user            : 'bbef480f7baaba',
-  password        : '5ac706672dd31ac',
+  password        :  process.env.DATABASE_PASSWORD,
   database        : 'heroku_643b9f3b4adb7e5'
 });
 

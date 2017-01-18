@@ -1,5 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
+var envFile = require('node-env-file');
+console.log(envFile(path.join(__dirname, 'config/dbcredentials.env')));
+envFile(path.join(__dirname, 'config/dbcredentials.env'));
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
