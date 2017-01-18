@@ -1,5 +1,5 @@
 var host = window.location.host;
-var serverURL = "http://" + host + "/";
+var serverURL = "http://" + host;
 console.log ("serverURL = ", serverURL);
 
 function getData() {
