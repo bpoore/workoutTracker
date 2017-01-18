@@ -1,5 +1,9 @@
 var host = window.location.host;
-var serverURL = "http://" + host;
+if (location.host === 'localhost:3000') {
+  var serverURL = "http://" + host;
+} else {
+  var serverURL = "https://" + host;
+}
 console.log ("serverURL = ", serverURL);
 
 function getData() {
