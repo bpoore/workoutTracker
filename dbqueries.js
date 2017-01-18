@@ -3,14 +3,14 @@ var SQL = require('sql-template-strings');
 
 var pool = mysql.createPool({
   connectionLimit : 10,
-  host            : 'localhost',
-  user            : 'root',
-  password        : 'password',
-  database        : 'weightlifting'
+  host            : 'us-cdbr-iron-east-04.cleardb.net',
+  user            : 'bbef480f7baaba',
+  password        : '5ac706672dd31ac',
+  database        : 'heroku_643b9f3b4adb7e5'
 });
 
 
-exports.getExercisesDateFormatted = function() { 
+exports.getExercisesDateFormatted = function() {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT id, name, reps, weight, DATE_FORMAT(date, "%M %d, %Y") as date, lbs  FROM workouts', function(err, results, fields) {
       if (err) {
@@ -22,7 +22,7 @@ exports.getExercisesDateFormatted = function() {
   });
 };
 
-exports.getExercise = function(id) { 
+exports.getExercise = function(id) {
   return new Promise(function(resolve, reject) {
     pool.query(SQL`SELECT * FROM workouts WHERE id=${id}`, function(err, results, fields) {
       if (err) {
@@ -34,7 +34,7 @@ exports.getExercise = function(id) {
   });
 };
 
-exports.updateExercise = function(name, reps, weight, date, lbs, id) { 
+exports.updateExercise = function(name, reps, weight, date, lbs, id) {
   return new Promise(function(resolve, reject) {
     pool.query(SQL`UPDATE workouts SET name=${name}, reps=${reps}, weight=${weight}, date=${date}, lbs=${lbs} WHERE id=${id}`, function(err, results, fields) {
       if (err) {
@@ -47,7 +47,7 @@ exports.updateExercise = function(name, reps, weight, date, lbs, id) {
   });
 };
 
-exports.insertExercise = function(name, reps, weight, date, lbs) { 
+exports.insertExercise = function(name, reps, weight, date, lbs) {
   if (reps.length === 0) {
     reps = undefined;
   };
@@ -72,7 +72,7 @@ exports.insertExercise = function(name, reps, weight, date, lbs) {
   });
 };
 
-exports.deleteExercise = function(id) { 
+exports.deleteExercise = function(id) {
   return new Promise(function(resolve, reject) {
     pool.query(SQL`DELETE FROM workouts WHERE id=${id}`, function(err, results, fields) {
       if (err) {
